@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Add User{% endblock %}
+
+{% block content %}
+
+{% for message in get_flashed_messages() %}
+
+<div class="alert alert-warning alert-dismissible fade show alert-text" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+
+{% endfor %}
+
+
+{% if name %}
+	<h1>Update User!</h1>
+	<br/><br/>
+<table class="table table-hover table-bordered table-striped">
+
+{% for our_user in our_users %}
+	<tr>
+        <td>{{ our_user.id }}. <a href="{{url_for('update', id=our_user.id)}}"> {{ our_user.name }} </a>  - {{ our_user.email }} - {{ our_user.favourite_color }}</td>>
+	</tr>
+{% endfor %}
+
+</table>
+
+
+{% else %}
+	<h1>Update User</h1>
+	<br/>
+<div class="shadow p-3 mb-5 bg-body rounded">
+	<form action="/update/{{name_to_update.id}}" method="POST">
+		{{ form.hidden_tag() }}
+		{{ form.name.label(class="form-label") }}
+		{{ form.name(class="form-control", placeholder=name_to_update.name) }}
+		{{ form.email.label(class="form-label") }}
+		{{ form.email(class="form-control", placeholder=name_to_update.email) }}
+        {{ form.favourite_color.label(class="form-label") }}
+		{{ form.favourite_color(class="form-control", placeholder=name_to_update.favourite_color) }}
+		{{ form.submit(class="btn btn-secondary") }}
+        <a href="{{ url_for('delete', id=id)}}" class="btn btn-danger">Delete</a>
+
+
+	</form>
+</div>
+<br/><br/><br/>
+{% endif %}
+
+{% endblock %}

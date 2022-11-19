@@ -1,0 +1,62 @@
+$primary-color: #1a2634;
+$background-color: #b84d69;
+$main-font-size: 1.125rem;
+$font-family: 'Ubuntu', sans-serif;
+$font-standart: 400;
+$font-bold: 700;
+
+
+body, html {
+    margin: 0;
+    font-family: $font-family;
+    height: 100vh;
+    font-size: $main-font-size;
+    font-weight: $font-standart;
+}
+
+.container {
+    margin: 0;
+    background: -webkit-linear-gradient(to top, #ef473a, $background-color);
+    background: linear-gradient(to top, #ef473a, $background-color);
+    min-width: 100%;
+    color: #fff;
+}
+
+.container-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    margin: 0;
+    padding: 1rem;
+    
+}
+
+nav a{
+    padding: 1rem;
+    font-weight: $font-bold;
+    text-decoration: none;
+    color: #fff;
+}
+
+nav a:active, nav a:hover, nav a:focus{
+    color: #fff;
+    background-color: $primary-color;
+    border: 4px solid $primary-color;
+}
+
+.alert-text{
+    width: 70%;
+    margin: 0 auto;
+    margin-top: 1rem;
+    font-weight: $font-bold;
+}
+.mygtukas{
+    background-color: #b84d69;
+}
+
