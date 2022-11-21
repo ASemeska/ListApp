@@ -21,7 +21,7 @@
 
 {% for our_user in our_users %}
 	<tr>
-	<td>{{ our_user.id }}. <a href="{{ url_for('update', id=our_user.id)}}">{{ our_user.name }}</a> - {{ our_user.email }} - {{ our_user.favourite_color }}<a href="{{ url_for('delete', id=our_user.id)}}">Delete</a></td>
+	<td>{{ our_user.id }}. <a href="{{ url_for('update', id=our_user.id)}}">{{ our_user.name }}</a> - {{ our_user.email }} - {{ our_user.username }}<a href="{{ url_for('delete', id=our_user.id)}}">Delete</a></td>
 	</tr>
 {% endfor %}
 
@@ -41,9 +41,9 @@
 		{{ form.email(class="form-control") }}
 		<br/>
 
-		{{ form.favourite_color.label(class="form-label") }}
+		{{ form.username.label(class="form-label") }}
 
-		{{ form.favourite_color(class="form-control") }}
+		{{ form.username(class="form-control") }}
 		<br/>
 		{{ form.password_hash.label(class="form-label") }}
 
@@ -62,7 +62,7 @@
 
 {% for our_user in our_users %}
 	<tr>
-	<td>{{ our_user.id }}. <a href="{{ url_for('update', id=our_user.id)}}">{{ our_user.name }}</a> - {{ our_user.email }} - {{ our_user.favourite_color }}<a href="{{ url_for('delete', id=our_user.id)}}">Delete</a></td>
+	<td>{{ our_user.id }}. <a href="{{ url_for('update', id=our_user.id)}}">{{ our_user.name }}</a> - {{ our_user.email }} - {{ our_user.username }}<a href="{{ url_for('delete', id=our_user.id)}}">Delete</a></td>
 	</tr>
 {% endfor %}
 
