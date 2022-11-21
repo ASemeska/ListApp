@@ -1,11 +1,14 @@
 import os
 from flask import Flask, render_template, flash, redirect, url_for
+from flask_wtf import FlaskForm
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, ValidationError
+from wtforms.validators import DataRequired, EqualTo, Length
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash
+from wtforms.widgets import TextArea
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
-from webforms import LoginForm, PostForm, UserForm, PasswordForm, NamerForm
 
 
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -30,6 +33,7 @@ class Users(db.Model, UserMixin):
 	username = db.Column(db.String(120), nullable=False, unique=True)
 	name = db.Column(db.String(50), nullable=False)
 	email = db.Column(db.String(120), nullable=False, unique=True)
+	favourite_color = db.Column(db.String(120))
 	date_added = db.Column(db.DateTime, default=datetime.utcnow)
 	password_hash = db.Column(db.String(128))
 
@@ -55,8 +59,36 @@ class Posts(db.Model):
 	date_posted = db.Column(db.DateTime, default=datetime.utcnow)
 	slug = db.Column(db.String(255))
 
+############Forms############
+class NamerForm(FlaskForm):
+    name = StringField("Whats your name", validators=[DataRequired()])
+    submit = SubmitField("Submit name")
+
+class PasswordForm(FlaskForm):
+	email = StringField("Whats your email", validators=[DataRequired()])
+	password_hash = PasswordField('Password', validators=[DataRequired()])
+	submit = SubmitField("Submit name")
+
+class UserForm(FlaskForm):
+	name = StringField("Whats your name", validators=[DataRequired()])
+	email = StringField("Whats your email", validators=[DataRequired()])
+	username = StringField("Whats your username", validators=[DataRequired()])
+	submit = SubmitField("Submit name")
+	password_hash = PasswordField('Password', validators=[DataRequired(), EqualTo('password_hash2', message='Passwords Must Match!')])
+	password_hash2 = PasswordField('Confirm Password', validators=[DataRequired()])
 
 
+class PostForm(FlaskForm):
+	title = StringField("Title", validators=[DataRequired()])
+	content = StringField("Content", validators=[DataRequired()], widget=TextArea())
+	author = StringField("Author", validators=[DataRequired()])
+	slug = StringField("Slug", validators=[DataRequired()])
+	submit = SubmitField("Submit")
+
+class LoginForm(FlaskForm):
+	username = StringField("Username", validators=[DataRequired()])
+	password = PasswordField("Password", validators=[DataRequired()])
+	submit = SubmitField("Submit")
 ############ROUTES############
 
 @app.route('/')

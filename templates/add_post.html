@@ -9,6 +9,9 @@
 	</div>
 {% endfor %}
 
+{% if current_user.is_authenticated  %}
+
+
 <h1>Add Blog Post...</h1>
 	<br/>
 <div class="shadow p-3 mb-5 bg-body rounded">
@@ -33,6 +36,9 @@
 	</form>
 </div>
 
+{% else %}
+<h1>Must be Logged in</h1>
 
+{% endif %}
 
 {% endblock %}
